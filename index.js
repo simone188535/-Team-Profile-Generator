@@ -81,10 +81,14 @@ const questions = [
 function init() {
     inquirer.prompt(questions).then((response) => {
 
+        // const team = [];
+        // push manager to team arr
+        
 
         // if (response.additionalTeamMember) return inquirer.prompt( intern or engineer question array)
+        // push team member to team arr 
 
-        // fs.writeFile('dist/index.html', generatedMarkup(), (err) => {
+        // fs.writeFile('dist/index.html', generatedMarkup(team), (err) => {
         //     if (err) throw console.error('Something went wrong while generating the README');
         //     console.log('The file has been created!');
         // });
