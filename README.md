@@ -17,6 +17,8 @@
 
   * [Tests](#tests)
 
+  * [Deployed Links](#deployed-links)
+
   * [Questions](#questions)
 
 
@@ -44,7 +46,9 @@
   ```
   npm test
   ```
+## Deployed Links
 
+* [The URL of the GitHub repository.](https://github.com/simone188535/Team-Profile-Generator)
   ## Questions
 
   If you have any questions about the repo, open
