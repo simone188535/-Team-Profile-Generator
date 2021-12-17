@@ -33,7 +33,7 @@
   make sure to run ```node index.js``` to start the app. Fill out all the questions as well as you can.
 
 ## Visuals
-  ![Professional README Generator](./assets/Professional-README-Generator.gif)
+  ![Team Profile Generator](./dist/assets/thumbnail.png)
 
   ## License
 
