@@ -1,9 +1,10 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const generatedMarkup = require("./lib/page-template");
+const generatedMarkup = require("./src/page-template");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
+const team = [];
 
 const ManagerQuestions = [
   {
@@ -79,61 +80,77 @@ const engineerQuestions = [
 const moreTeamMembers = [
   {
     type: "list",
-    message:
-      "Which type of team member would you like to add?",
+    message: "Which type of team member would you like to add?",
     pageSize: 3,
-    choices: ["Engineer", "Intern", "I don't want to add any more team members"],
+    choices: [
+      "Engineer",
+      "Intern",
+      "I don't want to add any more team members",
+    ],
     name: "additionalTeamMember",
   },
 ];
 
-async function init() {
-  const team = [];
-  const {
-    managerName,
-    managerId,
-    managerEmail,
-    managerNumber,
-  } = await inquirer.prompt(ManagerQuestions);
-
-  const manager = new Manager(
-    managerName,
-    managerId,
-    managerEmail,
-    managerNumber
-  );
-
-  // push manager to team arr
-  team.push(manager);
-
-  
-  const addMoreMembers = async () => {
+const addMoreMembers = async () => {
+  try {
     const { additionalTeamMember } = await inquirer.prompt(moreTeamMembers);
 
-    if (additionalTeamMember === 'Intern') {
-      const { internName, internId, internEmail, internSchool } = await inquirer.prompt(internQuestions);
+    if (additionalTeamMember === "Intern") {
+      const { internName, internId, internEmail, internSchool } =
+        await inquirer.prompt(internQuestions);
 
-      const newIntern = new Intern(internName, internId, internEmail, internSchool);
+      const newIntern = new Intern(
+        internName,
+        internId,
+        internEmail,
+        internSchool
+      );
 
       team.push(newIntern);
       await addMoreMembers();
-    } else if (additionalTeamMember === 'Engineer') {
-      const { engineerName, engineerId, engineerEmail, engineerGithub } = await inquirer.prompt(engineerQuestions);
-      
-      const newEngineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+    } else if (additionalTeamMember === "Engineer") {
+      const { engineerName, engineerId, engineerEmail, engineerGithub } =
+        await inquirer.prompt(engineerQuestions);
+
+      const newEngineer = new Engineer(
+        engineerName,
+        engineerId,
+        engineerEmail,
+        engineerGithub
+      );
 
       team.push(newEngineer);
       await addMoreMembers();
     } else return;
-
+  } catch (err) {
+    throw err;
   }
-  await addMoreMembers();
+};
 
+async function init() {
+  try {
+    const { managerName, managerId, managerEmail, managerNumber } =
+      await inquirer.prompt(ManagerQuestions);
 
-  fs.writeFile('dist/index.html', generatedMarkup(team), (err) => {
-      if (err) throw console.error('Something went wrong while generating the README');
-      console.log('The file has been created!');
-  });
+    const manager = new Manager(
+      managerName,
+      managerId,
+      managerEmail,
+      managerNumber
+    );
+
+    // push manager to team arr
+    team.push(manager);
+
+    await addMoreMembers();
+
+    fs.writeFile("dist/index.html", generatedMarkup(team), (err) => {
+      if (err) throw err;
+      console.log("The file has been created!");
+    });
+  } catch (err) {
+    console.error("Something went wrong. Please try again later.");
+  }
 }
 
 init();
