@@ -48,6 +48,8 @@
   ```
 ## Deployed Links
 
+* [Demo Video](https://watch.screencastify.com/v/DJFTDxQQUOyUYzwjEMFc)
+
 * [The URL of the GitHub repository.](https://github.com/simone188535/Team-Profile-Generator)
   ## Questions
 
