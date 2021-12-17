@@ -1,4 +1,4 @@
-const Employee = require('./../dist/Employee');
+const Employee = require('./../lib/Employee');
 
 // 19
 

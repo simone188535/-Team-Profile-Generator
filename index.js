@@ -1,10 +1,9 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const generatedMarkup = require("./lib/page-template");
-// const Employee = require("./dist/Employee");
-const Manager = require("./dist/Manager");
-const Intern = require("./dist/Intern");
-const Engineer = require("./dist/Engineer");
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
 
 const ManagerQuestions = [
   {
